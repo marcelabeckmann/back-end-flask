@@ -10,6 +10,11 @@ class UsersList(MethodView):
 
         return [{ "name": "Jose"}, {"name": "Marcela"}]
     
+class UsersID(MethodView):
+    def get(self, users_id):
+
+        return { "id": users_id, "users": "User1"}
+    
 class UsersResources(MethodView):
     def post(self):
         data = request.get_json()
@@ -33,4 +38,8 @@ users_blueprint.add_url_rule(
 users_blueprint.add_url_rule(
     'users',
     view_func=UsersResources.as_view("users_resources")
+)
+users_blueprint.add_url_rule(
+    'users/<users_id>',
+    view_func=UsersID.as_view("users_id")
 )
